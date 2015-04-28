@@ -116,7 +116,7 @@ package net.flashpunk.graphics
 				target.copyPixels(_buffer, _bufferRect, _point, null, null, true);
 				return;
 			}
-			
+			*/
 			// render with transformation
 			_matrix.b = _matrix.c = 0;
 			_matrix.a = scaleX * scale;
@@ -126,10 +126,13 @@ package net.flashpunk.graphics
 			if (angle != 0) _matrix.rotate(angle * FP.RAD);
 			_matrix.tx += originX + _point.x;
 			_matrix.ty += originY + _point.y;
-			_bitmap.smoothing = smooth;
-			target.draw(_bitmap, _matrix, null, blend, null, smooth);
-			*/
+			//_bitmap.smoothing = smooth;
+			//target.draw(_bitmap, _matrix, null, blend, null, smooth);
+			
+			_renderer.transform.matrix =  _matrix;
+			_renderer.transform.colorTransform = _colorTransform;
 			_renderer.bitmapData = _buffer;
+			/*
 			_renderer.scaleX = scaleX;
 			_renderer.scaleY = scaleY;
 			_renderer.rotation = angle;
@@ -137,6 +140,7 @@ package net.flashpunk.graphics
 			_renderer.y = -originY;
 			_holder.x = point.x + x - camera.x*scrollX;
 			_holder.y = point.y + y - camera.y*scrollY;
+			*/
 		}
 		
 		/**
