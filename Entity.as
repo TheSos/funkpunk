@@ -484,9 +484,9 @@ package net.flashpunk
 		public function set graphic(value:Graphic):void
 		{
 			if (_graphic == value) return;
-			if (_graphic) _renderer.removeChild(_graphic._holder);
+			//if (_graphic) _renderer.removeChild(_graphic._holder);
 			_graphic = value;
-			if (value) _renderer.addChild(value._holder);
+			//if (value) _renderer.addChild(value._holder);
 			if (value && value._assign != null) value._assign();
 		}
 		
@@ -749,6 +749,11 @@ package net.flashpunk
 		{
 			_name = value;
 			if (_world) _world.registerName(this);
+		}
+		
+		public function prerender():void 
+		{
+			//if (_graphic) _graphic.prerender();
 		}
 		
 		public function getClass ():Class { return _class; }

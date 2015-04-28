@@ -74,6 +74,9 @@
 		public function render():void 
 		{
 			// render the entities in order of depth
+			
+			for (var c:uint = 0; c < _renderer.numChildren;c++ ) _renderer.removeChildAt(c);
+			
 			var e:Entity,
 				i:int = _layerList.length;
 			while (i --)
@@ -81,7 +84,11 @@
 				e = _renderLast[_layerList[i]];
 				while (e)
 				{
-					if (e.visible) e.render();
+					if (e.visible) 
+					{
+						//e.prerender();
+						e.render();
+					}
 					e = e._renderPrev;
 				}
 			}
@@ -127,7 +134,7 @@
 		public function add(e:Entity):Entity
 		{
 			_add[_add.length] = e;
-			_renderer.addChild(e._renderer);
+			//_renderer.addChild(e._renderer);
 			return e;
 		}
 		
@@ -139,7 +146,7 @@
 		public function remove(e:Entity):Entity
 		{
 			_remove[_remove.length] = e;
-			_renderer.removeChild(e._renderer);
+			//_renderer.removeChild(e._renderer);
 			return e;
 		}
 		
@@ -152,7 +159,7 @@
 			while (e)
 			{
 				_remove[_remove.length] = e;
-				_renderer.removeChild(e._renderer);
+				//_renderer.removeChild(e._renderer);
 				e = e._updateNext;
 			}
 		}

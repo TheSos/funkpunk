@@ -55,7 +55,7 @@
 		 */
 		public function Graphic() 
 		{
-			_holder.addChild(_renderer);
+			//_holder.addChild(_renderer);
 		}
 		
 		/**
@@ -71,7 +71,7 @@
 		 * @param	point		The position to draw the graphic.
 		 * @param	camera		The camera offset.
 		 */
-		public function render(target:BitmapData, point:Point, camera:Point):void
+		public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false):void
 		{
 			
 		}
@@ -81,11 +81,15 @@
 		protected function set assign(value:Function):void { _assign = value; }
 		
 		
+		public function prerender():void 
+		{
+			for (var c:uint = 0; c < _holder.numChildren;c++ ) _holder.removeChildAt(c);
+		}
 		
 		
 		///** @private */ protected var _holder:Sprite = new Sprite;
 		/** @private */ public var _holder:Sprite= new Sprite;
-		/** @private */ public var _renderer:Bitmap = new Bitmap;
+		///** @private */ public var _renderer:Bitmap = new Bitmap;
 		
 		// Graphic information.
 		/** @private */ internal var _assign:Function;

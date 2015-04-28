@@ -101,7 +101,7 @@ package net.flashpunk.graphics
 		}
 		
 		/** @private Renders the image. */
-		override public function render(target:BitmapData, point:Point, camera:Point):void
+		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false):void
 		{
 			// quit if no graphic is assigned
 			if (!_buffer) return;
@@ -129,9 +129,13 @@ package net.flashpunk.graphics
 			//_bitmap.smoothing = smooth;
 			//target.draw(_bitmap, _matrix, null, blend, null, smooth);
 			
+			var _renderer:Bitmap = new Bitmap;
+			
 			_renderer.transform.matrix =  _matrix;
-			_renderer.transform.colorTransform = _colorTransform;
-			_renderer.bitmapData = _buffer;
+			//if (_tint) _renderer.transform.colorTransform = _tint; 
+			_renderer.bitmapData = clone ? _buffer.clone() : _buffer;
+			FP.world._renderer.addChild(_renderer);
+			
 			/*
 			_renderer.scaleX = scaleX;
 			_renderer.scaleY = scaleY;
@@ -190,12 +194,14 @@ package net.flashpunk.graphics
 		 */
 		public function updateBuffer(clearBefore:Boolean = false):void
 		{
+			/*
 			if (locked)
 			{
 				_needsUpdate = true;
 				if (clearBefore) _needsClear = true;
 				return;
 			}
+			*/
 			if (!_source) return;
 			if (clearBefore) _buffer.fillRect(_bufferRect, 0);
 			_buffer.copyPixels(_source, _sourceRect, FP.zero, _drawMask, FP.zero);
@@ -270,7 +276,7 @@ package net.flashpunk.graphics
 					return updateBuffer();
 				}
 			}
-			_tint = _colorTransform;
+			_tint = new ColorTransform;
 			
 			_tint.redMultiplier   = _tintMode * (1.0 - _tintFactor) + (1-_tintMode) * (_tintFactor * (Number(_color >> 16 & 0xFF) / 255 - 1) + 1);
 			_tint.greenMultiplier = _tintMode * (1.0 - _tintFactor) + (1-_tintMode) * (_tintFactor * (Number(_color >> 8 & 0xFF) / 255 - 1) + 1);
