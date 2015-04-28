@@ -153,6 +153,7 @@
 		public function set scale(value:Number):void
 		{
 			if (_scale == value) return;
+			_renderer.scaleX = _renderer.scaleY = value;
 			_scale = value;
 			update();
 		}

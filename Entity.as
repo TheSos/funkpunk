@@ -484,9 +484,9 @@ package net.flashpunk
 		public function set graphic(value:Graphic):void
 		{
 			if (_graphic == value) return;
-			_renderer.removeChild(_graphic._renderer);
+			if (_graphic) _renderer.removeChild(_graphic._holder);
 			_graphic = value;
-			if (value) _renderer.addChild(value._renderer);
+			if (value) _renderer.addChild(value._holder);
 			if (value && value._assign != null) value._assign();
 		}
 		
@@ -753,7 +753,7 @@ package net.flashpunk
 		
 		public function getClass ():Class { return _class; }
 		
-		/** @private */ public var _renderer:Sprite;
+		/** @private */ public var _renderer:Sprite = new Sprite;
 		
 		// Entity information.
 		/** @private */ internal var _class:Class;

@@ -188,6 +188,8 @@
 				_last = getTimer();
 				addEventListener(Event.ENTER_FRAME, onEnterFrame);
 			}
+			
+			stage.addChild(FP.screen._renderer);
 		}
 		
 		/** @private Framerate independent game loop. */

@@ -127,6 +127,7 @@
 		public function add(e:Entity):Entity
 		{
 			_add[_add.length] = e;
+			_renderer.addChild(e._renderer);
 			return e;
 		}
 		
@@ -138,6 +139,7 @@
 		public function remove(e:Entity):Entity
 		{
 			_remove[_remove.length] = e;
+			_renderer.removeChild(e._renderer);
 			return e;
 		}
 		
@@ -150,6 +152,7 @@
 			while (e)
 			{
 				_remove[_remove.length] = e;
+				_renderer.removeChild(e._renderer);
 				e = e._updateNext;
 			}
 		}

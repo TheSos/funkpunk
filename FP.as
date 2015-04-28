@@ -110,7 +110,13 @@
 		public static function set world(value:World):void
 		{
 			if (_world == value) return;
+			if (_world) 
+			{
+				if (_world._renderer.parent)
+					screen._renderer.removeChild(_world._renderer);
+			}
 			_goto = value;
+			if (value) screen._renderer.addChild(value._renderer);
 		}
 		
 		/**

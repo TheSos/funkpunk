@@ -109,7 +109,7 @@ package net.flashpunk.graphics
 			// determine drawing location
 			_point.x = point.x + x - originX - camera.x * scrollX;
 			_point.y = point.y + y - originY - camera.y * scrollY;
-			
+			/*
 			// render without transformation
 			if (angle == 0 && scaleX * scale == 1 && scaleY * scale == 1 && !blend)
 			{
@@ -128,13 +128,15 @@ package net.flashpunk.graphics
 			_matrix.ty += originY + _point.y;
 			_bitmap.smoothing = smooth;
 			target.draw(_bitmap, _matrix, null, blend, null, smooth);
-			
+			*/
 			_renderer.bitmapData = _buffer;
 			_renderer.scaleX = scaleX;
 			_renderer.scaleY = scaleY;
 			_renderer.rotation = angle;
-			_renderer.x = originX;
-			_renderer.y = originY;
+			_renderer.x = -originX;
+			_renderer.y = -originY;
+			_holder.x = point.x + x - camera.x*scrollX;
+			_holder.y = point.y + y - camera.y*scrollY;
 		}
 		
 		/**

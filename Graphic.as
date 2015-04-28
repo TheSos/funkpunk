@@ -55,7 +55,7 @@
 		 */
 		public function Graphic() 
 		{
-			
+			_holder.addChild(_renderer);
 		}
 		
 		/**
@@ -84,7 +84,8 @@
 		
 		
 		///** @private */ protected var _holder:Sprite = new Sprite;
-		/** @private */ protected var _renderer:Bitmap = new Bitmap;
+		/** @private */ public var _holder:Sprite= new Sprite;
+		/** @private */ public var _renderer:Bitmap = new Bitmap;
 		
 		// Graphic information.
 		/** @private */ internal var _assign:Function;
