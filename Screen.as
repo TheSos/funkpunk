@@ -7,6 +7,7 @@
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Transform;
+	import flash.text.TextField;
 	import net.flashpunk.graphics.Image;
 	
 	/**
@@ -205,7 +206,13 @@
 		}
 		
 		// Screen infromation.
+			public function set_filter(filters:Array):void
+		{
+			_bitmap[0].filters = filters;
+			_bitmap[1].filters = filters;
+		}
 		
+		/** @private */ public var _debug:TextField= new TextField;
 		
 		/** @private */ public var _renderer:Sprite = new Sprite;
 		

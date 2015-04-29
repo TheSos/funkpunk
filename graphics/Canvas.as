@@ -52,7 +52,7 @@
 		}
 		
 		/** @private Renders the canvas. */
-		override public function render(target:BitmapData, point:Point, camera:Point):void 
+		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false):void 
 		{
 			// determine drawing location
 			_point.x = point.x + x - camera.x * scrollX;

@@ -81,7 +81,7 @@
 		}
 		
 		/** @private Renders the PreRotated graphic. */
-		override public function render(target:BitmapData, point:Point, camera:Point):void 
+		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false):void 
 		{
 			frameAngle %= 360;
 			if (frameAngle < 0) frameAngle += 360;

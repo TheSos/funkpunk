@@ -71,7 +71,7 @@
 		 * @param	point		The position to draw the graphic.
 		 * @param	camera		The camera offset.
 		 */
-		public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false):void
+		public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false,clone_id:uint=-1):void
 		{
 			
 		}

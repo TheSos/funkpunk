@@ -9,7 +9,9 @@
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
+	import flash.filters.GlowFilter;
 	import flash.geom.Rectangle;
+	import flash.text.TextFormat;
 	import flash.utils.getTimer;
 	import flash.utils.Timer;
 	import net.flashpunk.utils.Draw;
@@ -118,6 +120,9 @@
 			if (_frameList.length > 10) _frameListSum -= _frameList.shift();
 			FP.frameRate = 1000 / (_frameListSum / _frameList.length);
 			_frameLast = t;
+			
+			FP.screen._debug.text = "FunkPunk v0.0.2\nEntities: " + FP.world._renderer.numChildren + "\nFPS: " + FP.frameRate.toFixed();
+			
 		}
 		
 		/**
@@ -190,6 +195,14 @@
 			}
 			
 			stage.addChild(FP.screen._renderer);
+			
+			stage.addChild(FP.screen._debug);
+			
+			FP.screen._debug.defaultTextFormat  = new TextFormat("retro", 32, 0xf9966cc);
+			FP.screen._debug.filters = [new GlowFilter(0,1,4,4,200,1)]
+			FP.screen._debug.width = stage.width;
+			FP.screen._debug.multiline = true;
+			FP.screen._debug.text = "asdfasdfrdfghadfgha\nasdfgasdfg";
 		}
 		
 		/** @private Framerate independent game loop. */
@@ -224,6 +237,8 @@
 			_time = _flashTime = getTimer();
 			FP._renderTime = _time - _renderTime;
 			FP._gameTime = _time - _gameTime;
+			
+			
 		}
 		
 		/** @private Fixed framerate game loop. */

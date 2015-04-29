@@ -30,7 +30,7 @@
 		}
 		
 		/** @private Renders the Graphics in the list. */
-		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false):void 
+		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false,clone_id:uint=-1):void 
 		{
 			point.x += x;
 			point.y += y;

@@ -101,7 +101,7 @@ package net.flashpunk.graphics
 		}
 		
 		/** @private Renders the image. */
-		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false):void
+		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false,clone_id:uint=-1):void
 		{
 			// quit if no graphic is assigned
 			if (!_buffer) return;
@@ -129,11 +129,13 @@ package net.flashpunk.graphics
 			//_bitmap.smoothing = smooth;
 			//target.draw(_bitmap, _matrix, null, blend, null, smooth);
 			
-			var _renderer:Bitmap = new Bitmap;
+			var _renderer:Bitmap = FP.world.poolpull();
 			
 			_renderer.transform.matrix =  _matrix;
 			//if (_tint) _renderer.transform.colorTransform = _tint; 
-			_renderer.bitmapData = clone ? _buffer.clone() : _buffer;
+			if (clone) if (!_pool[clone_id]) _pool[clone_id] = _buffer.clone();
+			_renderer.bitmapData = clone ? _pool[clone_id] : _buffer;
+			
 			FP.world._renderer.addChild(_renderer);
 			
 			/*
@@ -403,11 +405,16 @@ package net.flashpunk.graphics
 		 */
 		public function get locked():Boolean { return _locked; }
 		
+		public function get buffer():BitmapData{ return _buffer; }
+		
 		// Locking
 		/** @private */ protected var _locked:Boolean = false;
 		/** @private */ protected var _needsClear:Boolean = false;
 		/** @private */ protected var _needsUpdate:Boolean = false;
 		
+		
+		
+		/** @private */ protected var _pool:Object = new Object;
 		// Source and buffer information.
 		/** @private */ protected var _source:BitmapData;
 		/** @private */ protected var _sourceRect:Rectangle;

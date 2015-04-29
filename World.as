@@ -1,5 +1,7 @@
 ﻿package net.flashpunk
 {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
@@ -75,7 +77,11 @@
 		{
 			// render the entities in order of depth
 			
-			for (var c:uint = 0; c < _renderer.numChildren;c++ ) _renderer.removeChildAt(c);
+			while (_renderer.numChildren)
+			{
+				_pool.push(_renderer.getChildAt(0));
+				_renderer.removeChildAt(0);
+			}
 			
 			var e:Entity,
 				i:int = _layerList.length;
@@ -694,6 +700,8 @@
 			return near;
 		}
 		
+		
+		
 		/**
 		 * How many Entities are in the World.
 		 */
@@ -1184,7 +1192,30 @@
 			return squarePoints(px, py, rx, ry);
 		}
 		
+		public function poolpull(bmp:BitmapData = null):Bitmap 
+		{
+			var ret:Bitmap = null;
+			/*
+			for (var c:uint = 0; c < _pool.length; c++)
+			{
+				if (_pool[c].bitmapData == bmp)
+				{
+					ret = _pool[c];
+					_pool.splice(c, 1);
+				}
+			}
+			*/
+			//if (!ret)
+			{
+				if (_pool.length) ret = _pool.shift(); else ret = new Bitmap;
+				//ret.bitmapData = bmp;
+			}
+			return ret;
+		}
+		
 		/** @private */ public var _renderer:Sprite = new Sprite;
+		
+		/** @private */ public var _pool:Vector.<Bitmap> = new Vector.<Bitmap>;
 		
 		// Adding and removal.
 		/** @private */	private var _add:Vector.<Entity> = new Vector.<Entity>;
