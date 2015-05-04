@@ -34,7 +34,7 @@
 		}
 		
 		/** @private Renders the Backdrop. */
-		override public function render(target:BitmapData, point:Point, camera:Point):void 
+		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false,clone_is:uint=-1):void 
 		{
 			_point.x = point.x + x - camera.x * scrollX;
 			_point.y = point.y + y - camera.y * scrollY;

@@ -100,6 +100,8 @@ package net.flashpunk.graphics
 			_bitmap.bitmapData = _buffer;
 		}
 		
+		
+		
 		/** @private Renders the image. */
 		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false,clone_id:uint=-1):void
 		{
@@ -109,6 +111,10 @@ package net.flashpunk.graphics
 			// determine drawing location
 			_point.x = point.x + x - originX - camera.x * scrollX;
 			_point.y = point.y + y - originY - camera.y * scrollY;
+			if (_point.x < -width) return;
+			if (_point.x > FP.width + width*scaleX) return;
+			if (_point.y < -height) return;
+			if (_point.y > FP.height + height*scaleY) return;
 			/*
 			// render without transformation
 			if (angle == 0 && scaleX * scale == 1 && scaleY * scale == 1 && !blend)
@@ -129,6 +135,8 @@ package net.flashpunk.graphics
 			//_bitmap.smoothing = smooth;
 			//target.draw(_bitmap, _matrix, null, blend, null, smooth);
 			
+			punkrender(_buffer, _matrix,null, clone, clone_id);
+			/*
 			var _renderer:Bitmap = FP.world.poolpull();
 			
 			_renderer.transform.matrix =  _matrix;
@@ -137,7 +145,7 @@ package net.flashpunk.graphics
 			_renderer.bitmapData = clone ? _pool[clone_id] : _buffer;
 			
 			FP.world._renderer.addChild(_renderer);
-			
+			*/
 			/*
 			_renderer.scaleX = scaleX;
 			_renderer.scaleY = scaleY;
@@ -414,7 +422,7 @@ package net.flashpunk.graphics
 		
 		
 		
-		/** @private */ protected var _pool:Object = new Object;
+		
 		// Source and buffer information.
 		/** @private */ protected var _source:BitmapData;
 		/** @private */ protected var _sourceRect:Rectangle;

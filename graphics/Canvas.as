@@ -52,7 +52,7 @@
 		}
 		
 		/** @private Renders the canvas. */
-		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false):void 
+		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false,cloneid:uint=-1):void 
 		{
 			// determine drawing location
 			_point.x = point.x + x - camera.x * scrollX;
@@ -65,14 +65,17 @@
 				while (xx < _refWidth)
 				{
 					buffer = _buffers[_ref.getPixel(xx, yy)];
-					if (_tint || blend)
-					{
+					//if (_tint || blend)
+					//{
 						_matrix.tx = _point.x;
 						_matrix.ty = _point.y;
-						_bitmap.bitmapData = buffer;
-						target.draw(_bitmap, _matrix, _tint, blend);
-					}
-					else target.copyPixels(buffer, buffer.rect, _point, null, null, true);
+						//_bitmap.bitmapData = buffer;
+						//target.draw(_bitmap, _matrix, _tint, blend);
+					//}
+					//else target.copyPixels(buffer, buffer.rect, _point, null, null, true);
+					
+					punkrender(buffer, _matrix, null, clone, cloneid);
+					
 					_point.x += _maxWidth;
 					xx ++;
 				}

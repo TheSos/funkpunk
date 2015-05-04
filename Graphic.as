@@ -4,6 +4,8 @@
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
+	import flash.geom.ColorTransform;
+	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
 	/**
@@ -66,6 +68,19 @@
 			
 		}
 		
+		public function punkrender(buffer:BitmapData,matrix:Matrix,tint:ColorTransform = null,clone:Boolean=false,clone_id:uint=-1)
+		{
+			var _renderer:Bitmap = FP.world.poolpull();
+			_renderer.cacheAsBitmap = false;
+			_renderer.transform.matrix =  matrix;
+			if (tint) _renderer.transform.colorTransform = tint; 
+			if (clone) if (!_pool[clone_id]) _pool[clone_id] = buffer.clone();
+			_renderer.bitmapData = clone ? _pool[clone_id] : buffer;
+			
+			FP.world._renderer.addChild(_renderer);
+			
+		}
+		
 		/**
 		 * Renders the graphic to the screen buffer.
 		 * @param	point		The position to draw the graphic.
@@ -81,14 +96,17 @@
 		protected function set assign(value:Function):void { _assign = value; }
 		
 		
+		/** @private */ protected var _pool:Object = new Object;
+		/*
 		public function prerender():void 
 		{
 			for (var c:uint = 0; c < _holder.numChildren;c++ ) _holder.removeChildAt(c);
 		}
 		
 		
-		///** @private */ protected var _holder:Sprite = new Sprite;
-		/** @private */ public var _holder:Sprite= new Sprite;
+		protected var _holder:Sprite = new Sprite;
+		public var _holder:Sprite = new Sprite;
+		*/
 		///** @private */ public var _renderer:Bitmap = new Bitmap;
 		
 		// Graphic information.

@@ -121,7 +121,7 @@
 			FP.frameRate = 1000 / (_frameListSum / _frameList.length);
 			_frameLast = t;
 			
-			FP.screen._debug.text = "FunkPunk v0.0.2\nEntities: " + FP.world._renderer.numChildren + "\nFPS: " + FP.frameRate.toFixed();
+			FP.screen._debug.text = "NUM: " + FP.world._renderer.numChildren + " FPS: " + FP.frameRate.toFixed();
 			
 		}
 		
@@ -147,13 +147,15 @@
 		public function setStageProperties():void
 		{
 			stage.frameRate = FP.assignedFrameRate;
+			stage.fullScreenSourceRect = new Rectangle(0, 0, FP.width, FP.height);
+			//stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE; 
 			//stage.align = StageAlign.TOP_LEFT;
-			stage.quality = StageQuality.HIGH;
+			stage.quality = StageQuality.LOW;
 			//stage.scaleMode = StageScaleMode.NO_SCALE;
 		//	stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 		}
 		
-		/** @private Event handler for stage entry. */
+		/** @private Event handler for stage entry. */ 
 		private function onStage(e:Event = null):void
 		{
 			// remove event listener
@@ -194,13 +196,14 @@
 				addEventListener(Event.ENTER_FRAME, onEnterFrame);
 			}
 			
-			stage.addChild(FP.screen._renderer);
+			
 			
 			stage.addChild(FP.screen._debug);
 			
 			FP.screen._debug.defaultTextFormat  = new TextFormat("retro", 32, 0xf9966cc);
 			FP.screen._debug.filters = [new GlowFilter(0,1,4,4,200,1)]
-			FP.screen._debug.width = stage.width;
+			FP.screen._debug.width = 800;
+			//FP.screen._debug.height = 100;
 			FP.screen._debug.multiline = true;
 			FP.screen._debug.text = "asdfasdfrdfghadfgha\nasdfgasdfg";
 		}

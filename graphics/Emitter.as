@@ -84,7 +84,7 @@
 		}
 		
 		/** @private Renders the particles. */
-		override public function render(target:BitmapData, point:Point, camera:Point):void 
+		override public function render(target:BitmapData, point:Point, camera:Point,clone:Boolean = false,cloneid:uint=-1):void 
 		{
 			// quit if there are no particles
 			if (!_particle) return;
@@ -121,7 +121,7 @@
 				rect.x %= type._width;
 				
 				// draw particle
-				if (type._buffer)
+				//if (type._buffer)
 				{
 					// get alpha
 					_tint.alphaMultiplier = type._alpha + type._alphaRange * ((type._alphaEase == null) ? t : type._alphaEase(t));
@@ -131,14 +131,17 @@
 					_tint.redMultiplier = type._red + type._redRange * td;
 					_tint.greenMultiplier = type._green + type._greenRange * td;
 					_tint.blueMultiplier  = type._blue + type._blueRange * td;
-					type._buffer.fillRect(type._bufferRect, 0);
-					type._buffer.copyPixels(type._source, rect, FP.zero);
-					type._buffer.colorTransform(type._bufferRect, _tint);
+					//punkrender(
+					//type._buffer.fillRect(type._bufferRect, 0);
+					//type._buffer.copyPixels(type._source, rect, FP.zero);
+					//type._buffer.colorTransform(type._bufferRect, _tint);
+					
+					
 					
 					// draw particle
-					target.copyPixels(type._buffer, type._bufferRect, _p, null, null, true);
+					//target.copyPixels(type._buffer, type._bufferRect, _p, null, null, true);
 				}
-				else target.copyPixels(type._source, rect, _p, null, null, true);
+				//else target.copyPixels(type._source, rect, _p, null, null, true);
 				
 				// get next particle
 				p = p._next;

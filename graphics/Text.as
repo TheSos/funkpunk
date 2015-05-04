@@ -28,7 +28,7 @@
 		/**
 		 * The font size to assign to new Text objects.
 		 */
-		public static var size:uint = 8;
+		public static var size:uint = 16;
 
 		/**
 		 * The alignment to assign to new Text objects.
