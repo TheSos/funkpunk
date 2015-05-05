@@ -1,4 +1,4 @@
-# funkpunk v0.0.2
+# funkpunk v0.0.4
 #### *Flashpunk modified to use GPU rendering!*
 
 ## Current state
@@ -6,6 +6,7 @@ It *"just works"* This is the initial version that displays sutuff properly usin
 Games of mine that currently work in FunkPunk:
 - Driller Goriller - http://driller.sos.gd
 - Badass vs Hipsters  - http://badass.sos.gd
+- Attack of The Heavenly Bats  - You'll have to google that one :P
 
 ## TODO
 - tinting - DONE!
@@ -14,7 +15,10 @@ Games of mine that currently work in FunkPunk:
 - resource management
 - scaling and pixels - DONE!
 - console
-- pixelbuffer overlay
+- pixelbuffer overlay - probably DONE!
+- canvas - DONE!
+- particles
+- scaling
 - probably heaps of stuff
  
 ## Usage
